@@ -12,9 +12,11 @@ import { Name } from '../../domain/name';
 import { Email } from '../../domain/email';
 import { Password } from '../../domain/password';
 import { User } from '../../infra/typeorm/entities/User';
-import { IEncoderProvider } from '../../../../shared/providers/encoder/IEnconderProvider';
-import { EncodeError } from '../../../../shared/providers/encoder/errors/EncoderError';
-import { IMailProvider } from '../../../../shared/providers/mail/IMailProvider';
+import { IEncoderProvider } from '../../../../shared/providers/Encoder/IEnconderProvider';
+import { EncodeError } from '../../../../shared/providers/Encoder/errors/EncoderError';
+import { IMailProvider } from '../../../../shared/providers/Mail/IMailProvider';
+
+import path from 'path';
 
 type CreaterUserUseCaseResponse = Either<
   InvalidNameError | InvalidEmailError | InvalidPasswordError | EncodeError | UserAlreadyExists,
@@ -69,14 +71,25 @@ export class CreateUserUseCase {
 
     const user = await this.usersRepository.create({ name, email, password });
 
-    this.mailService.sendMail({
+    const file = path.resolve(__dirname, '..', '..', 'views', 'wellcome.hbs');
+
+    const sendMailOrError = await this.mailService.sendMail({
       to: {
         name: user.name,
         address: user.email,
       },
-      subject: 'Boas Vindas',
-      body: `<p>Olá, ${user.name}, muito obrigado por se cadastrar em nosso sistema :D</p>`,
+      subject: '🎉 Boas Vindas 🎉',
+      template: {
+        file,
+        variables: {
+          name: user.name,
+        },
+      },
     });
+
+    if (sendMailOrError.isLeft()) {
+      return left(sendMailOrError.value);
+    }
 
     return right(user);
   }

@@ -1,11 +1,13 @@
+import { IMailTemplateProviderProps } from '../../dtos/IMailTemplateProviderProps';
+
 interface IMailContact {
   name: string;
   address: string;
 }
 
-interface ISendMail {
+export interface ISendMail {
   to: IMailContact;
   from?: IMailContact;
   subject: string;
-  body: string;
+  template: IMailTemplateProviderProps;
 }

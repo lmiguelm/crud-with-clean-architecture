@@ -1,4 +1,5 @@
 import { Either, right } from '../../../logic/Either';
+import { ISendMail } from '../dtos/ISendMailDTO';
 import { MailServiceError } from '../errors/MailServiceError';
 import { IMailProvider } from '../IMailProvider';
 

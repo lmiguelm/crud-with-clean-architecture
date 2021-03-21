@@ -5,11 +5,18 @@ import { Either, left, right } from '../../../logic/Either';
 import { MailServiceError } from '../errors/MailServiceError';
 
 import { NAME, MAIL } from '../../../utils/environments';
+import { inject, injectable } from 'tsyringe';
+import { IMailTemplateProvider } from '../../MailTemplate/IMailTemplateProvider';
+import { ISendMail } from '../dtos/ISendMailDTO';
 
+@injectable()
 export class MailtrapProvider implements IMailProvider {
   private readonly transporter: Transporter;
 
-  constructor() {
+  constructor(
+    @inject('MailTemplateProvider')
+    private template: IMailTemplateProvider
+  ) {
     this.transporter = nodemailer.createTransport(mailConfig.mailtrap);
   }
 
@@ -17,14 +24,20 @@ export class MailtrapProvider implements IMailProvider {
     from = { name: NAME, address: MAIL },
     to,
     subject,
-    body,
+    template,
   }: ISendMail): Promise<Either<MailServiceError, boolean>> {
+    const templateOrError = await this.template.parse(template);
+
+    if (templateOrError.isLeft()) {
+      return left(templateOrError.value);
+    }
+
     try {
       await this.transporter.sendMail({
         from,
         to,
         subject,
-        html: body,
+        html: templateOrError.value,
       });
       return right(true);
     } catch (error) {

@@ -1,2 +1,3 @@
-import './encoder';
-import './mail';
+import './Encoder';
+import './Mail';
+import './MailTemplate';

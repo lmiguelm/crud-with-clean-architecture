@@ -14,6 +14,7 @@ export class CreateUserController {
 
       return res.status(201).json(userOrError.value);
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ error: 'Erro interno do servidor.' });
     }
   }
