@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import { userRoutes } from '../../../modules/users/infra/http/user.routes';
 
 const routes = Router();
 
-routes.get('/', (req, res) => {
-  return res.json({ hello: 'world' });
-});
+routes.use('/users', userRoutes);
 
 export { routes };
