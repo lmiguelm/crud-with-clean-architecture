@@ -1,6 +1,3 @@
-import { Email } from './email';
-import { Name } from './name';
-import { Password } from './password';
 import { User } from './user';
 
 describe('Testando a validação de dominio de usuário', () => {

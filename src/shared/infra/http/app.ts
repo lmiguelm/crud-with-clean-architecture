@@ -1,6 +1,8 @@
 import createConnection from '../../infra/typeorm';
 createConnection();
 
+import '../../container';
+
 import cors from 'cors';
 
 import { routes } from './routes';
