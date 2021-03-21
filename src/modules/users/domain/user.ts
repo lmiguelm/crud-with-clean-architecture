@@ -9,8 +9,8 @@ import { Email } from './email';
 import { Password } from './password';
 
 interface UserProps {
-  email: string;
   name: string;
+  email: string;
   password: string;
 }
 
