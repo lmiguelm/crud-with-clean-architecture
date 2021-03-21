@@ -13,9 +13,10 @@ import { Email } from '../../domain/email';
 import { Password } from '../../domain/password';
 import { User } from '../../infra/typeorm/entities/User';
 import { IEncoder } from '../../../../shared/infra/encoder/IEnconder';
+import { EncodeError } from '../../../../shared/infra/encoder/errors/EncoderError';
 
 type CreaterUserUseCaseResponse = Either<
-  InvalidNameError | InvalidEmailError | InvalidPasswordError | UserAlreadyExists,
+  InvalidNameError | InvalidEmailError | InvalidPasswordError | EncodeError | UserAlreadyExists,
   User
 >;
 
@@ -48,7 +49,15 @@ export class CreateUserUseCase {
 
     const name = nameOrError.value.value;
     const email = emailOrError.value.value;
-    const password = await this.encoder.encode(passwordOrError.value.value);
+    let password = passwordOrError.value.value;
+
+    const passwordHashOrError = await this.encoder.encode(password);
+
+    if (passwordHashOrError.isLeft()) {
+      return left(passwordHashOrError.value);
+    }
+
+    password = passwordHashOrError.value;
 
     if (await this.usersRepository.exists(email)) {
       return left(new UserAlreadyExists(email));
