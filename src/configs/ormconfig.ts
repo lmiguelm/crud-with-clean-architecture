@@ -38,6 +38,4 @@ const typeormConfig: ConnectionOptions = {
   },
 };
 
-console.log(typeormConfig);
-
 export default typeormConfig;
