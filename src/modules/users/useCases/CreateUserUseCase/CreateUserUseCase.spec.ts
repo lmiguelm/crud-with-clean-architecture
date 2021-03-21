@@ -1,13 +1,16 @@
 import { getConnection } from 'typeorm';
-import createConnection from '../../../shared/infra/typeorm';
+import { IEncoder } from '../../../../shared/infra/encoder/IEnconder';
+import { BcryptEncoder } from '../../../../shared/infra/encoder/implementations/BcryptEncoder';
+import createConnection from '../../../../shared/infra/typeorm';
 
-import { TypeormUsersRepository } from '../repositories/implementations/TypeormUsersRespository';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { TypeormUsersRepository } from '../../repositories/implementations/TypeormUsersRespository';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { UserAlreadyExists } from './errors/UserAlreadyExists';
 
 let repository: IUsersRepository;
 let createUser: CreateUserUseCase;
+let encoder: IEncoder;
 
 describe('Criação de novos usuários', () => {
   beforeAll(async () => {
@@ -15,7 +18,8 @@ describe('Criação de novos usuários', () => {
     await connection.runMigrations();
 
     repository = new TypeormUsersRepository();
-    createUser = new CreateUserUseCase(repository);
+    encoder = new BcryptEncoder();
+    createUser = new CreateUserUseCase(repository, encoder);
   });
 
   afterAll(async () => {
@@ -57,7 +61,6 @@ describe('Criação de novos usuários', () => {
     };
     const userOrError = await createUser.execute(user);
 
-    console.log(userOrError.value);
     expect(await repository.exists(user.email)).toBeTruthy();
     expect(userOrError.isRight()).toBeTruthy();
   });

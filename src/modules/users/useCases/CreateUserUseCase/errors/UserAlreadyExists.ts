@@ -1,4 +1,4 @@
-import { IUseCasesError } from '../../../../shared/errors/IUseCasesError';
+import { IUseCasesError } from '../../../../../shared/errors/IUseCasesError';
 
 export class UserAlreadyExists extends Error implements IUseCasesError {
   constructor(email: string) {

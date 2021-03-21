@@ -1,17 +1,18 @@
 import { injectable, inject } from 'tsyringe';
-import { Either, left, right } from '../../../shared/logic/Either';
-import { ICreateUser } from '../dtos/ICreateUser';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { Either, left, right } from '../../../../shared/logic/Either';
+import { ICreateUser } from '../../dtos/ICreateUser';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
-import { InvalidEmailError } from '../domain/errors/InvalidEmailError';
-import { InvalidNameError } from '../domain/errors/InvalidNameError';
-import { InvalidPasswordError } from '../domain/errors/InvalidPasswordError';
+import { InvalidEmailError } from '../../domain/errors/InvalidEmailError';
+import { InvalidNameError } from '../../domain/errors/InvalidNameError';
+import { InvalidPasswordError } from '../../domain/errors/InvalidPasswordError';
 import { UserAlreadyExists } from './errors/UserAlreadyExists';
 
-import { Name } from '../domain/name';
-import { Email } from '../domain/email';
-import { Password } from '../domain/password';
-import { User } from '../infra/typeorm/entities/User';
+import { Name } from '../../domain/name';
+import { Email } from '../../domain/email';
+import { Password } from '../../domain/password';
+import { User } from '../../infra/typeorm/entities/User';
+import { IEncoder } from '../../../../shared/infra/encoder/IEnconder';
 
 type CreaterUserUseCaseResponse = Either<
   InvalidNameError | InvalidEmailError | InvalidPasswordError | UserAlreadyExists,
@@ -22,7 +23,10 @@ type CreaterUserUseCaseResponse = Either<
 export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject('Encoder')
+    private encoder: IEncoder
   ) {}
 
   async execute(data: ICreateUser): Promise<CreaterUserUseCaseResponse> {
@@ -44,7 +48,7 @@ export class CreateUserUseCase {
 
     const name = nameOrError.value.value;
     const email = emailOrError.value.value;
-    const password = passwordOrError.value.value;
+    const password = await this.encoder.encode(passwordOrError.value.value);
 
     if (await this.usersRepository.exists(email)) {
       return left(new UserAlreadyExists(email));
