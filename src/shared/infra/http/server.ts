@@ -1,4 +1,4 @@
-import { PORT } from '../../utils/enviroments';
+import { PORT } from '../../utils/environments';
 
 import { app } from './app';
 
