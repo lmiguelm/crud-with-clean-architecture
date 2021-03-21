@@ -1,5 +1,5 @@
 // user
 import './user';
 
-// bcrypt
-import '../infra/encoder';
+// shared providers
+import '../providers';

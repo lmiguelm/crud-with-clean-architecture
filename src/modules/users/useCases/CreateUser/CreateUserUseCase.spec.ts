@@ -1,16 +1,19 @@
 import { getConnection } from 'typeorm';
-import { IEncoder } from '../../../../shared/infra/encoder/IEnconder';
-import { BcryptEncoder } from '../../../../shared/infra/encoder/implementations/BcryptEncoder';
+import { IEncoderProvider } from '../../../../shared/providers/encoder/IEnconderProvider';
+import { BcryptEncoder } from '../../../../shared/providers/encoder/implementations/BcryptEncoder';
 import createConnection from '../../../../shared/infra/typeorm';
 
 import { TypeormUsersRepository } from '../../repositories/implementations/TypeormUsersRespository';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { UserAlreadyExists } from './errors/UserAlreadyExists';
+import { IMailProvider } from '../../../../shared/providers/mail/IMailProvider';
+import { FakeMailProvider } from '../../../../shared/providers/mail/implementations/FakeMailProvider';
 
 let repository: IUsersRepository;
 let createUser: CreateUserUseCase;
-let encoder: IEncoder;
+let encoderProvider: IEncoderProvider;
+let mailProvider: IMailProvider;
 
 describe('Criação de novos usuários', () => {
   beforeAll(async () => {
@@ -18,8 +21,9 @@ describe('Criação de novos usuários', () => {
     await connection.runMigrations();
 
     repository = new TypeormUsersRepository();
-    encoder = new BcryptEncoder();
-    createUser = new CreateUserUseCase(repository, encoder);
+    encoderProvider = new BcryptEncoder();
+    mailProvider = new FakeMailProvider();
+    createUser = new CreateUserUseCase(repository, encoderProvider, mailProvider);
   });
 
   afterAll(async () => {

@@ -12,8 +12,9 @@ import { Name } from '../../domain/name';
 import { Email } from '../../domain/email';
 import { Password } from '../../domain/password';
 import { User } from '../../infra/typeorm/entities/User';
-import { IEncoder } from '../../../../shared/infra/encoder/IEnconder';
-import { EncodeError } from '../../../../shared/infra/encoder/errors/EncoderError';
+import { IEncoderProvider } from '../../../../shared/providers/encoder/IEnconderProvider';
+import { EncodeError } from '../../../../shared/providers/encoder/errors/EncoderError';
+import { IMailProvider } from '../../../../shared/providers/mail/IMailProvider';
 
 type CreaterUserUseCaseResponse = Either<
   InvalidNameError | InvalidEmailError | InvalidPasswordError | EncodeError | UserAlreadyExists,
@@ -26,8 +27,11 @@ export class CreateUserUseCase {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('Encoder')
-    private encoder: IEncoder
+    @inject('IEncoderProvider')
+    private encoder: IEncoderProvider,
+
+    @inject('MailProvider')
+    private mailService: IMailProvider
   ) {}
 
   async execute(data: ICreateUser): Promise<CreaterUserUseCaseResponse> {
@@ -64,6 +68,15 @@ export class CreateUserUseCase {
     }
 
     const user = await this.usersRepository.create({ name, email, password });
+
+    this.mailService.sendMail({
+      to: {
+        name: user.name,
+        address: user.email,
+      },
+      subject: 'Boas Vindas',
+      body: `<p>Olá, ${user.name}, muito obrigado por se cadastrar em nosso sistema :D</p>`,
+    });
 
     return right(user);
   }

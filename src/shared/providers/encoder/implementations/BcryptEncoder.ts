@@ -1,10 +1,10 @@
-import { IEncoder } from '../IEnconder';
 import bcrypt from 'bcrypt';
 import { Either, left, right } from '../../../logic/Either';
 import { EncodeError } from '../errors/EncoderError';
 import { CompareHashError } from '../errors/CompareHashError';
+import { IEncoderProvider } from '../IEnconderProvider';
 
-export class BcryptEncoder implements IEncoder {
+export class BcryptEncoder implements IEncoderProvider {
   async encode(value: string): Promise<Either<EncodeError, string>> {
     try {
       const valueEncoded = await bcrypt.hash(value, bcrypt.genSaltSync());
