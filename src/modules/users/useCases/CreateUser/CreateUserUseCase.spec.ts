@@ -1,7 +1,7 @@
+import createConnection from '../../../../shared/infra/typeorm';
 import { getConnection } from 'typeorm';
 import { IEncoderProvider } from '../../../../shared/infra/providers/Encoder/IEnconderProvider';
 import { BcryptEncoder } from '../../../../shared/infra/providers/Encoder/implementations/BcryptEncoder';
-import createConnection from '../../../../shared/infra/typeorm';
 
 import { TypeormUsersRepository } from '../../repositories/implementations/TypeormUsersRespository';
 import { IUsersRepository } from '../../repositories/IUsersRepository';

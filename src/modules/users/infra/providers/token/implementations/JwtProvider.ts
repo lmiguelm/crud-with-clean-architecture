@@ -31,7 +31,7 @@ export class JwtProvider implements ITokenProvider {
 
       const decoded: any = jwt.verify(hash, this.secret);
 
-      return right(decoded.id);
+      return right(decoded);
     } catch (_) {
       return left(new TokenError());
     }

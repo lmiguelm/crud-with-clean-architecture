@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd ./src/shared/infra/http/server.ts --ignore-watch node_modules/ --transpile-only",
+    "dev": "tsnd ./src/shared/infra/http/server.ts --inspect --ignore-watch node_modules/ --transpile-only",
     "typeorm": "tsnd node_modules/typeorm/cli.js --config src/configs/ormconfig.ts",
     "test": "SET NODE_ENV=test& jest --watch"
   },

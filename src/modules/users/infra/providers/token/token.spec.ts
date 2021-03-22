@@ -1,9 +1,6 @@
 import { JwtProvider } from './implementations/JwtProvider';
 import { v4 as uuid } from 'uuid';
 
-import * as sinon from 'sinon';
-import { TokenExpiredError } from 'jsonwebtoken';
-
 let jwt: JwtProvider;
 
 describe('Gerenciamento de token', () => {
