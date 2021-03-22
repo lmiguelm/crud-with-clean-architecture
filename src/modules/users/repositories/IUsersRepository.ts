@@ -7,4 +7,5 @@ export interface IUsersRepository {
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
   update(id: string, data?: IUserProps): Promise<void>;
+  delete(id: string): Promise<boolean>;
 }

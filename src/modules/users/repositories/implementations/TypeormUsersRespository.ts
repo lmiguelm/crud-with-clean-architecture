@@ -33,4 +33,13 @@ export class TypeormUsersRepository implements IUsersRepository {
   async findById(id: string): Promise<User> {
     return await this.repo.findOne({ id });
   }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      await this.repo.delete(id);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

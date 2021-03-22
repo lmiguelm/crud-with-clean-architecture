@@ -5,6 +5,7 @@ import { EnsureAuthenticatedMiddleware } from '../middlewares/EnsureAuthenticate
 import { createUserController } from '../controllers/CreateUserController';
 import { updateUserController } from '../controllers/UpdateUserController';
 import { listUserController } from '../controllers/ListUserController';
+import { removeUserController } from '../controllers/RemoveUserController';
 
 const ensureAuthenticated = container.resolve(EnsureAuthenticatedMiddleware);
 
@@ -22,6 +23,12 @@ userRoutes.put(
   '/',
   (req, res, next) => ensureAuthenticated.execute(req, res, next),
   updateUserController.handle
+);
+
+userRoutes.delete(
+  '/',
+  (req, res, next) => ensureAuthenticated.execute(req, res, next),
+  removeUserController.handle
 );
 
 export { userRoutes };
