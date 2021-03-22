@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserUseCase } from '../../../useCases/CreateUser/CreateUserUseCase';
 
-export class CreateUserController {
+class CreateUserController {
   async handle(req: Request, res: Response) {
     try {
       const { name, email, password } = req.body;
@@ -25,3 +25,5 @@ export class CreateUserController {
     }
   }
 }
+
+export const createUserController = new CreateUserController();

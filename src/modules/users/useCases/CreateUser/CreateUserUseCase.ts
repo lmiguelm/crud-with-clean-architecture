@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import { Either, left, right } from '../../../../shared/logic/Either';
-import { ICreateUserProps } from '../../dtos/ICreateUser';
+import { IUserProps } from '../../dtos/IUser';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 import { InvalidEmailError } from '../../domain/errors/InvalidEmailError';
@@ -38,7 +38,7 @@ export class CreateUserUseCase {
     private mailService: IMailProvider
   ) {}
 
-  async execute(data: ICreateUserProps): CreaterUserUseCaseResponse {
+  async execute(data: IUserProps): CreaterUserUseCaseResponse {
     const nameOrError = await Name.create(data.name);
     const emailOrError = await Email.create(data.email);
     const passwordOrError = await Password.create(data.password);

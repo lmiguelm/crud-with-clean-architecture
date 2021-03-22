@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { AuthenticateUserUseCase } from '../../../useCases/AuthenticateUser/AuthenticateUserUseCase';
 
-export class AuthenticateUserController {
+class AuthenticateUserController {
   async handle(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
@@ -27,3 +27,5 @@ export class AuthenticateUserController {
     }
   }
 }
+
+export const authenticateUserController = new AuthenticateUserController();

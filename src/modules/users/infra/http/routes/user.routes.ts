@@ -1,10 +1,20 @@
 import { Router } from 'express';
-import { CreateUserController } from '../controllers/CreateUserController';
+import { container } from 'tsyringe';
+
+import { EnsureAuthenticatedMiddleware } from '../middlewares/EnsureAuthenticatedMiddleware';
+import { createUserController } from '../controllers/CreateUserController';
+import { updateUserController } from '../controllers/UpdateUserController';
+
+const ensureAuthenticated = container.resolve(EnsureAuthenticatedMiddleware);
 
 const userRoutes = Router();
 
-const createUserController = new CreateUserController();
-
 userRoutes.post('/', createUserController.handle);
+
+userRoutes.put(
+  '/',
+  (req, res, next) => ensureAuthenticated.execute(req, res, next),
+  updateUserController.handle
+);
 
 export { userRoutes };

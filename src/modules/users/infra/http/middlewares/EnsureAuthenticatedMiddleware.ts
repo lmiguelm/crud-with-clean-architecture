@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { ITokenProvider } from '../../providers/token/ITokenProvider';
 import { Request, Response, NextFunction } from 'express';
+import { JwtProvider } from '../../providers/token/implementations/JwtProvider';
 
 interface IVerifyTokenResponse {
   iat: number;
