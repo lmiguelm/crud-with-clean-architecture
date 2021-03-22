@@ -1,5 +1,6 @@
 node_modules/
-src/shared/infra/databases/**.sqlite
+build/
 
 .env
 yarn-error.log
+src/shared/infra/databases/**.sqlite
