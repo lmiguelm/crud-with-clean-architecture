@@ -1,16 +1,16 @@
 import { getConnection } from 'typeorm';
 import createConnection from '../../../../shared/infra/typeorm';
 
-import { IEncoderProvider } from '../../../../shared/providers/Encoder/IEnconderProvider';
-import { BcryptEncoder } from '../../../../shared/providers/Encoder/implementations/BcryptEncoder';
-import { IMailProvider } from '../../../../shared/providers/Mail/IMailProvider';
-import { FakeMailProvider } from '../../../../shared/providers/Mail/implementations/FakeMailProvider';
+import { IEncoderProvider } from '../../../../shared/infra/providers/Encoder/IEnconderProvider';
+import { BcryptEncoder } from '../../../../shared/infra/providers/Encoder/implementations/BcryptEncoder';
+import { IMailProvider } from '../../../../shared/infra/providers/Mail/IMailProvider';
+import { FakeMailProvider } from '../../../../shared/infra/providers/Mail/implementations/FakeMailProvider';
 import { TypeormUsersRepository } from '../../repositories/implementations/TypeormUsersRespository';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { CreateUserUseCase } from '../CreateUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
-import { ITokenProvider } from '../../providers/token/ITokenProvider';
-import { JwtProvider } from '../../providers/token/implementations/JwtProvider';
+import { ITokenProvider } from '../../infra/providers/token/ITokenProvider';
+import { JwtProvider } from '../../infra/providers/token/implementations/JwtProvider';
 
 let authenticateUser: AuthenticateUserUseCase;
 let userRepository: IUsersRepository;

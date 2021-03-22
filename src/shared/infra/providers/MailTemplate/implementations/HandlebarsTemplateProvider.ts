@@ -2,7 +2,7 @@ import HandleBars from 'handlebars';
 import fs from 'fs';
 
 import { CannotGenerateTemplate } from '../errors/CannotGenerateTemplate';
-import { Either, left, right } from '../../../logic/Either';
+import { Either, left, right } from '../../../../logic/Either';
 
 import { IMailTemplateProvider, IMailTemplateProviderProps } from '../IMailTemplateProvider';
 

@@ -5,6 +5,12 @@ import { CreateUserUseCase } from '../../../useCases/CreateUser/CreateUserUseCas
 export class CreateUserController {
   async handle(req: Request, res: Response) {
     try {
+      const { name, email, password } = req.body;
+
+      if (!email || !password || !name) {
+        return res.status(400).json({ error: 'Parâmetros obrigatórios não informados.' });
+      }
+
       const createUserUse = container.resolve(CreateUserUseCase);
       const userOrError = await createUserUse.execute(req.body);
 

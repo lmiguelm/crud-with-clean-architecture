@@ -12,9 +12,9 @@ import { Name } from '../../domain/name';
 import { Email } from '../../domain/email';
 import { Password } from '../../domain/password';
 import { User } from '../../infra/typeorm/entities/User';
-import { IEncoderProvider } from '../../../../shared/providers/Encoder/IEnconderProvider';
-import { EncodeError } from '../../../../shared/providers/Encoder/errors/EncoderError';
-import { IMailProvider } from '../../../../shared/providers/Mail/IMailProvider';
+import { IEncoderProvider } from '../../../../shared/infra/providers/Encoder/IEnconderProvider';
+import { EncodeError } from '../../../../shared/infra/providers/Encoder/errors/EncoderError';
+import { IMailProvider } from '../../../../shared/infra/providers/Mail/IMailProvider';
 
 import path from 'path';
 

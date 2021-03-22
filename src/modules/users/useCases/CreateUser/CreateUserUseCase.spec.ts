@@ -1,14 +1,14 @@
 import { getConnection } from 'typeorm';
-import { IEncoderProvider } from '../../../../shared/providers/Encoder/IEnconderProvider';
-import { BcryptEncoder } from '../../../../shared/providers/Encoder/implementations/BcryptEncoder';
+import { IEncoderProvider } from '../../../../shared/infra/providers/Encoder/IEnconderProvider';
+import { BcryptEncoder } from '../../../../shared/infra/providers/Encoder/implementations/BcryptEncoder';
 import createConnection from '../../../../shared/infra/typeorm';
 
 import { TypeormUsersRepository } from '../../repositories/implementations/TypeormUsersRespository';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { UserAlreadyExists } from './errors/UserAlreadyExists';
-import { IMailProvider } from '../../../../shared/providers/Mail/IMailProvider';
-import { FakeMailProvider } from '../../../../shared/providers/Mail/implementations/FakeMailProvider';
+import { IMailProvider } from '../../../../shared/infra/providers/Mail/IMailProvider';
+import { FakeMailProvider } from '../../../../shared/infra/providers/Mail/implementations/FakeMailProvider';
 
 let repository: IUsersRepository;
 let createUser: CreateUserUseCase;

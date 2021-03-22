@@ -1,5 +1,5 @@
-import { Either } from '../../logic/Either';
-import { IMailTemplateProviderProps } from '../MailTemplate/dtos/IMailTemplateProviderProps';
+import { Either } from '../../../logic/Either';
+import { IMailTemplateProviderProps } from '../MailTemplate/IMailTemplateProvider';
 import { MailServiceError } from './errors/MailServiceError';
 
 interface IMailContact {

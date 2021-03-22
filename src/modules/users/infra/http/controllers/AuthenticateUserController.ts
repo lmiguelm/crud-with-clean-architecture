@@ -8,7 +8,7 @@ export class AuthenticateUserController {
       const { email, password } = req.body;
 
       if (!email || !password) {
-        return res.status(400).json({ error: 'Parametros obrigatórios não informados.' });
+        return res.status(400).json({ error: 'Parâmetros obrigatórios não informados.' });
       }
 
       const authenticateUser = container.resolve(AuthenticateUserUseCase);
@@ -16,7 +16,6 @@ export class AuthenticateUserController {
       const tokenOrError = await authenticateUser.execute(req.body);
 
       if (tokenOrError.isLeft()) {
-        console.log(tokenOrError);
         return res.status(400).json({ error: tokenOrError.value.message });
       }
 

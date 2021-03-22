@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { Either, left, right } from '../../../../shared/logic/Either';
-import { IEncoderProvider } from '../../../../shared/providers/Encoder/IEnconderProvider';
+import { IEncoderProvider } from '../../../../shared/infra/providers/Encoder/IEnconderProvider';
 import { IAthenticateUserProps, IAuthenticateUserResponse } from '../../dtos/IAuthenticateUser';
-import { ITokenProvider } from '../../providers/token/ITokenProvider';
+import { ITokenProvider } from '../../infra/providers/token/ITokenProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { InvalidEmailOrPassword } from './errors/InvalidEmailOrPassword';
 

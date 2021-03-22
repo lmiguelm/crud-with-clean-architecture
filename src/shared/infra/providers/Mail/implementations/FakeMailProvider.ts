@@ -1,4 +1,4 @@
-import { Either, right } from '../../../logic/Either';
+import { Either, right } from '../../../../logic/Either';
 import { MailServiceError } from '../errors/MailServiceError';
 import { IMailProvider, ISendMail } from '../IMailProvider';
 

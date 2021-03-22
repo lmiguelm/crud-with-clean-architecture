@@ -1,4 +1,4 @@
-import { Either } from '../../logic/Either';
+import { Either } from '../../../logic/Either';
 import { CompareHashError } from './errors/CompareHashError';
 import { EncodeError } from './errors/EncoderError';
 

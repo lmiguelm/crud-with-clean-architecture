@@ -1,4 +1,4 @@
-import { Either } from '../../logic/Either';
+import { Either } from '../../../logic/Either';
 import { CannotGenerateTemplate } from './errors/CannotGenerateTemplate';
 
 interface ITemplateVariables {

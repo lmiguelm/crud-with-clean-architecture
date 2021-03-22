@@ -1,8 +1,8 @@
-import { authConfig } from '../../../../../configs/auth';
+import { authConfig } from '../../../../../../configs/auth';
 import { ITokenProvider } from '../ITokenProvider';
 
 import jwt from 'jsonwebtoken';
-import { Either, left, right } from '../../../../../shared/logic/Either';
+import { Either, left, right } from '../../../../../../shared/logic/Either';
 import { TokenError } from '../errors/TokenError';
 
 export class JwtProvider implements ITokenProvider {

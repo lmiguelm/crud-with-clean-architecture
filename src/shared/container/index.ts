@@ -2,4 +2,4 @@
 import '../../modules/users/container';
 
 // shared providers
-import '../providers';
+import '../infra/providers';

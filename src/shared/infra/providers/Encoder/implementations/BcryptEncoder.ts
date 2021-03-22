@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { Either, left, right } from '../../../logic/Either';
+import { Either, left, right } from '../../../../logic/Either';
 import { EncodeError } from '../errors/EncoderError';
 import { CompareHashError } from '../errors/CompareHashError';
 import { IEncoderProvider } from '../IEnconderProvider';

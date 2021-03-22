@@ -1,4 +1,4 @@
-import { IEncoderError } from '../../../errors/IEconderError';
+import { IEncoderError } from '../../../../errors/IEconderError';
 
 export class CompareHashError extends Error implements IEncoderError {
   constructor(value: string, hash: string) {

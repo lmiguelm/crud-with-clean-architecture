@@ -1,4 +1,4 @@
-import { Either } from '../../../../shared/logic/Either';
+import { Either } from '../../../../../shared/logic/Either';
 import { TokenError } from './errors/TokenError';
 
 export interface ITokenProvider {
