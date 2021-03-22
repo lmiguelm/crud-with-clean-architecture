@@ -31,7 +31,7 @@ export class CreateUserUseCase {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('IEncoderProvider')
+    @inject('EncoderProvider')
     private encoder: IEncoderProvider,
 
     @inject('MailProvider')
