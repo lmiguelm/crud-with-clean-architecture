@@ -4,8 +4,7 @@ import fs from 'fs';
 import { CannotGenerateTemplate } from '../errors/CannotGenerateTemplate';
 import { Either, left, right } from '../../../logic/Either';
 
-import { IMailTemplateProvider } from '../IMailTemplateProvider';
-import { IMailTemplateProviderProps } from '../../dtos/IMailTemplateProviderProps';
+import { IMailTemplateProvider, IMailTemplateProviderProps } from '../IMailTemplateProvider';
 
 export class HandlebarsTemplateProvider implements IMailTemplateProvider {
   async parse({

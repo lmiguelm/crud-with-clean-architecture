@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import { Either, left, right } from '../../../../shared/logic/Either';
-import { ICreateUser } from '../../dtos/ICreateUser';
+import { ICreateUserProps } from '../../dtos/ICreateUser';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 import { InvalidEmailError } from '../../domain/errors/InvalidEmailError';
@@ -18,9 +18,11 @@ import { IMailProvider } from '../../../../shared/providers/Mail/IMailProvider';
 
 import path from 'path';
 
-type CreaterUserUseCaseResponse = Either<
-  InvalidNameError | InvalidEmailError | InvalidPasswordError | EncodeError | UserAlreadyExists,
-  User
+type CreaterUserUseCaseResponse = Promise<
+  Either<
+    InvalidNameError | InvalidEmailError | InvalidPasswordError | EncodeError | UserAlreadyExists,
+    User
+  >
 >;
 
 @injectable()
@@ -36,7 +38,7 @@ export class CreateUserUseCase {
     private mailService: IMailProvider
   ) {}
 
-  async execute(data: ICreateUser): Promise<CreaterUserUseCaseResponse> {
+  async execute(data: ICreateUserProps): CreaterUserUseCaseResponse {
     const nameOrError = await Name.create(data.name);
     const emailOrError = await Email.create(data.email);
     const passwordOrError = await Password.create(data.password);

@@ -1,5 +1,5 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { ICreateUser } from '../../dtos/ICreateUser';
+import { ICreateUserProps } from '../../dtos/ICreateUser';
 import { User } from '../../infra/typeorm/entities/User';
 import { IUsersRepository } from '../IUsersRepository';
 
@@ -16,9 +16,13 @@ export class TypeormUsersRepository implements IUsersRepository {
     return false;
   }
 
-  async create(data: ICreateUser): Promise<User> {
+  async create(data: ICreateUserProps): Promise<User> {
     const user = this.repo.create(data);
     await this.repo.save(user);
     return user;
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return await this.repo.findOne({ email });
   }
 }

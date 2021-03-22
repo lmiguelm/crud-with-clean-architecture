@@ -1,5 +1,5 @@
-// user
-import './user';
+// users
+import '../../modules/users/container';
 
 // shared providers
 import '../providers';

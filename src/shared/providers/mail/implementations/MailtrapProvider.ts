@@ -1,4 +1,4 @@
-import { IMailProvider } from '../IMailProvider';
+import { IMailProvider, ISendMail } from '../IMailProvider';
 import nodemailer, { Transporter } from 'nodemailer';
 import { mailConfig } from '../../../../configs/mailconfig';
 import { Either, left, right } from '../../../logic/Either';
@@ -7,7 +7,6 @@ import { MailServiceError } from '../errors/MailServiceError';
 import { NAME, MAIL } from '../../../utils/environments';
 import { inject, injectable } from 'tsyringe';
 import { IMailTemplateProvider } from '../../MailTemplate/IMailTemplateProvider';
-import { ISendMail } from '../dtos/ISendMailDTO';
 
 @injectable()
 export class MailtrapProvider implements IMailProvider {
