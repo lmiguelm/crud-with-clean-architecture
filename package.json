@@ -6,10 +6,9 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "prod:server": "node ./dist/shared/infra/http/server.js",
-    "prod:typeorm": "node node_modules/typeorm/cli.js --config dist/configs/ormconfig.js",
-    "dev:server": "tsnd ./src/shared/infra/http/server.ts --inspect --ignore-watch node_modules/ --transpile-only",
-    "dev:typeorm": "tsnd node_modules/typeorm/cli.js --config src/configs/ormconfig.ts",
+    "start": "node ./dist/shared/infra/http/server.js",
+    "dev": "tsnd ./src/shared/infra/http/server.ts --inspect --ignore-watch node_modules/ --transpile-only",
+    "typeorm": "node node_modules/typeorm/cli.js",
     "test": "SET NODE_ENV=test& jest --watch"
   },
   "dependencies": {

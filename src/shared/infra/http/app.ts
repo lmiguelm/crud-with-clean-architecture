@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import createConnection from '../../infra/typeorm';
+
 createConnection();
 
 import '../../container';
