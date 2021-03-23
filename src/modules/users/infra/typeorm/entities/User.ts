@@ -1,20 +1,18 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm';
-import { Exclude } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 
 @Entity('users')
 export class User {
-  @PrimaryColumn()
+  @PrimaryColumn('varchar')
   id: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Exclude()
-  @Column()
+  @Column('varchar')
   password: string;
 
   @CreateDateColumn({ name: 'created_at' })

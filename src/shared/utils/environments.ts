@@ -17,5 +17,8 @@ export const {
 // mailtrap
 export const { MAILTRA_HOST, MAILTRAP_PORT, MAILTRAP_USER, MAILTRAP_PASS } = process.env;
 
+// sendgrid
+export const { SENDGRID_API_KEY } = process.env;
+
 // auth
 export const { SECRET, EXPIRESIN } = process.env;
